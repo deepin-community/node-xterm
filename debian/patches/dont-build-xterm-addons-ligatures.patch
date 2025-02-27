@@ -1,0 +1,15 @@
+Description: don't build xterm-addon-ligatures (missing dependencies)
+Author: Yadd <yadd@debian.org>
+Forwarded: not-needed
+Last-Update: 2023-09-15
+
+--- a/tsconfig.all.json
++++ b/tsconfig.all.json
+@@ -9,7 +9,6 @@
+     { "path": "./addons/xterm-addon-canvas" },
+     { "path": "./addons/xterm-addon-fit" },
+     { "path": "./addons/xterm-addon-image" },
+-    { "path": "./addons/xterm-addon-ligatures" },
+     { "path": "./addons/xterm-addon-search" },
+     { "path": "./addons/xterm-addon-serialize" },
+     { "path": "./addons/xterm-addon-unicode11" },

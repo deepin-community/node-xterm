@@ -1,20 +1,27 @@
 Source: node-xterm
 Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
-Uploaders: Ghislain Antony Vaillant <ghisvail@gmail.com>,
-           Ximin Luo <infinity0@debian.org>
+Uploaders: Ghislain Antony Vaillant <ghisvail@gmail.com>
+ , Ximin Luo <infinity0@debian.org>
 Section: javascript
 Priority: optional
-Build-Depends: chai <!nocheck>,
-               debhelper-compat (= 12),
-               mocha <!nocheck>,
-               rollup,
-               node-typescript,
-               node-types-jquery,
-               node-types-jsdom,
-               node-types-mocha,
-               nodejs,
-               pkg-js-tools
-Standards-Version: 4.5.0
+Build-Depends: debhelper-compat (= 13)
+ , chai
+ , dh-sequence-nodejs
+ , dh-nodejs
+ , clang
+ , lld
+ , inwasm
+ , libjs-sizzle
+ , mocha
+ , node-glob
+ , node-jquery
+ , node-jsdom
+ , node-node-pty
+ , node-sixel
+ , node-typescript
+ , wabt (>= 1.0.36~)
+ , webpack
+Standards-Version: 4.7.0
 Vcs-Browser: https://salsa.debian.org/js-team/node-xterm
 Vcs-Git: https://salsa.debian.org/js-team/node-xterm.git
 Homepage: https://xtermjs.org
@@ -22,8 +29,10 @@ Rules-Requires-Root: no
 
 Package: node-xterm
 Architecture: all
-Depends: libjs-xterm, ${misc:Depends}
-Suggests: nodejs
+Depends: ${misc:Depends}
+Recommends: node-inwasm-runtime
+Suggests: nodejs:any
+Provides: ${nodejs:Provides}
 Description: terminal front-end component for the browser - NodeJS modules
  Xterm.js is a terminal front-end component written in JavaScript that works in
  the browser.
@@ -52,6 +61,7 @@ Description: terminal front-end component for the browser - NodeJS modules
 Package: libjs-xterm
 Architecture: all
 Depends: ${misc:Depends}
+Recommends: javascript-common
 Description: terminal front-end component for the browser - browser library
  Xterm.js is a terminal front-end component written in JavaScript that works in
  the browser.

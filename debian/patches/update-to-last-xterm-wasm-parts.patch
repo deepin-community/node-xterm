@@ -1,0 +1,25 @@
+Description: update to last xterm-wasm-parts
+Author: Yadd <yadd@debian.org>
+Forwarded: not-needed
+Last-Update: 2023-09-15
+
+--- a/addons/xterm-addon-image/src/IIPHandler.ts
++++ b/addons/xterm-addon-image/src/IIPHandler.ts
+@@ -54,7 +54,7 @@
+     if (this._aborted) return;
+ 
+     if (this._hp.state === HeaderState.END) {
+-      if (this._dec.put(data, start, end)) {
++      if (this._dec.put(data)) {
+         this._dec.release();
+         this._aborted = true;
+       }
+@@ -71,7 +71,7 @@
+           return;
+         }
+         this._dec.init(this._header.size);
+-        if (this._dec.put(data, dataPos, end)) {
++        if (this._dec.put(data)) {
+           this._dec.release();
+           this._aborted = true;
+         }

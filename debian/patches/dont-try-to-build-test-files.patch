@@ -1,0 +1,124 @@
+Description: don't validate ts for test files
+Author: Yadd <yadd@debian.org>
+Forwarded: not-needed
+Last-Update: 2023-09-14
+
+--- a/addons/xterm-addon-attach/tsconfig.json
++++ b/addons/xterm-addon-attach/tsconfig.json
+@@ -2,7 +2,6 @@
+   "files": [],
+   "include": [],
+   "references": [
+-    { "path": "./src" },
+-    { "path": "./test" }
++    { "path": "./src" }
+   ]
+ }
+--- a/addons/xterm-addon-fit/tsconfig.json
++++ b/addons/xterm-addon-fit/tsconfig.json
+@@ -2,7 +2,6 @@
+   "files": [],
+   "include": [],
+   "references": [
+-    { "path": "./src" },
+-    { "path": "./test" }
++    { "path": "./src" }
+   ]
+ }
+--- a/addons/xterm-addon-image/tsconfig.json
++++ b/addons/xterm-addon-image/tsconfig.json
+@@ -2,7 +2,6 @@
+   "files": [],
+   "include": [],
+   "references": [
+-    { "path": "./src" },
+-    { "path": "./test" }
++    { "path": "./src" }
+   ]
+ }
+--- a/addons/xterm-addon-image/webpack.config.js
++++ b/addons/xterm-addon-image/webpack.config.js
+@@ -21,6 +21,11 @@
+       }
+     ]
+   },
++  resolve: {
++    alias: {
++      common: path.resolve(__dirname, '../../out/common'),
++    },
++  },
+   output: {
+     filename: mainFile,
+     path: path.resolve('./lib'),
+--- a/addons/xterm-addon-search/tsconfig.json
++++ b/addons/xterm-addon-search/tsconfig.json
+@@ -2,7 +2,6 @@
+   "files": [],
+   "include": [],
+   "references": [
+-    { "path": "./src" },
+-    { "path": "./test" }
++    { "path": "./src" }
+   ]
+ }
+--- a/addons/xterm-addon-serialize/tsconfig.json
++++ b/addons/xterm-addon-serialize/tsconfig.json
+@@ -2,8 +2,6 @@
+   "files": [],
+   "include": [],
+   "references": [
+-    { "path": "./src" },
+-    { "path": "./test" },
+-    { "path": "./benchmark" }
++    { "path": "./src" }
+   ]
+ }
+--- a/addons/xterm-addon-unicode11/tsconfig.json
++++ b/addons/xterm-addon-unicode11/tsconfig.json
+@@ -2,7 +2,6 @@
+   "files": [],
+   "include": [],
+   "references": [
+-    { "path": "./src" },
+-    { "path": "./test" }
++    { "path": "./src" }
+   ]
+ }
+--- a/addons/xterm-addon-web-links/tsconfig.json
++++ b/addons/xterm-addon-web-links/tsconfig.json
+@@ -2,7 +2,6 @@
+   "files": [],
+   "include": [],
+   "references": [
+-    { "path": "./src" },
+-    { "path": "./test" }
++    { "path": "./src" }
+   ]
+ }
+--- a/addons/xterm-addon-webgl/tsconfig.json
++++ b/addons/xterm-addon-webgl/tsconfig.json
+@@ -2,7 +2,6 @@
+   "files": [],
+   "include": [],
+   "references": [
+-    { "path": "./src" },
+-    { "path": "./test" }
++    { "path": "./src" }
+   ]
+ }
+--- a/tsconfig.all.json
++++ b/tsconfig.all.json
+@@ -1,12 +1,10 @@
+ {
+   "files": [],
+   "include": [],
++  "exclude": ["**/benchmark/**/*", "**/test/**/*", "demo/"],
+   "references": [
+     { "path": "./src/browser" },
+     { "path": "./src/headless" },
+-    { "path": "./test/api" },
+-    { "path": "./test/benchmark" },
+-    { "path": "./test/playwright" },
+     { "path": "./addons/xterm-addon-attach" },
+     { "path": "./addons/xterm-addon-canvas" },
+     { "path": "./addons/xterm-addon-fit" },

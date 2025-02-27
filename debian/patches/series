@@ -1,4 +1,6 @@
-0001-Fix-mismatched-attribute-wheelDeltaY-deltaY.patch
-0002-Fix-renamed-type-Canvas2DContextAttributes-CanvasRen.patch
-0003-Fix-renamed-type-MediaQueryListListener-EventListene.patch
-0004-ignore-some-types-missing-errors.patch
+dont-try-to-build-test-files.patch
+update-to-last-xterm-wasm-parts.patch
+dont-build-benchmark.patch
+#dont-build-test-files.patch
+dont-build-xterm-addons-ligatures.patch
+limit-test-memory.patch

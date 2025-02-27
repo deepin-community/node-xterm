@@ -1,0 +1,9 @@
+usr/share/javascript/xterm/addons/attach/xterm-addon-attach.js	usr/share/javascript/xterm/addons/attach/attach.js
+usr/share/javascript/xterm/addons/canvas/xterm-addon-canvas.js	usr/share/javascript/xterm/addons/canvas/canvas.js
+usr/share/javascript/xterm/addons/fit/xterm-addon-fit.js	usr/share/javascript/xterm/addons/fit/fit.js
+usr/share/javascript/xterm/addons/image/xterm-addon-image.js	usr/share/javascript/xterm/addons/image/image.js
+usr/share/javascript/xterm/addons/search/xterm-addon-search.js	usr/share/javascript/xterm/addons/search/search.js
+usr/share/javascript/xterm/addons/serialize/xterm-addon-serialize.js	usr/share/javascript/xterm/addons/serialize/serialize.js
+usr/share/javascript/xterm/addons/unicode11/xterm-addon-unicode11.js	usr/share/javascript/xterm/addons/unicode11/unicode11.js
+usr/share/javascript/xterm/addons/webgl/xterm-addon-webgl.js	usr/share/javascript/xterm/addons/webgl/webgl.js
+usr/share/javascript/xterm/addons/webLinks/xterm-addon-web-links.js	usr/share/javascript/xterm/addons/webLinks/webLinks.js
