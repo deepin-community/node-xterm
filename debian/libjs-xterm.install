@@ -1,1 +1,11 @@
-dist/* /usr/share/javascript/xterm
+css/*	usr/share/javascript/xterm/
+lib/*	usr/share/javascript/xterm/
+addons/xterm-addon-attach/lib/*	usr/share/javascript/xterm/addons/attach/
+addons/xterm-addon-canvas/lib/*	usr/share/javascript/xterm/addons/canvas/
+addons/xterm-addon-fit/lib/*	usr/share/javascript/xterm/addons/fit/
+addons/xterm-addon-image/lib/*	usr/share/javascript/xterm/addons/image/
+addons/xterm-addon-search/lib/*	usr/share/javascript/xterm/addons/search/
+addons/xterm-addon-serialize/lib/*	usr/share/javascript/xterm/addons/serialize/
+addons/xterm-addon-unicode11/lib/*	usr/share/javascript/xterm/addons/unicode11/
+addons/xterm-addon-webgl/lib/*	usr/share/javascript/xterm/addons/webgl/
+addons/xterm-addon-web-links/lib/*	usr/share/javascript/xterm/addons/webLinks/

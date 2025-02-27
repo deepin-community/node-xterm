@@ -1,2 +1,0 @@
-echo "Skip tests, not built"
-#mocha -R spec --exit lib/*.test.js

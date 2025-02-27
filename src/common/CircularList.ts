@@ -3,17 +3,35 @@
  * @license MIT
  */
 
-import { EventEmitter } from './EventEmitter';
-import { ICircularList } from './Types';
+import { ICircularList } from 'common/Types';
+import { EventEmitter } from 'common/EventEmitter';
+import { Disposable } from 'common/Lifecycle';
+
+export interface IInsertEvent {
+  index: number;
+  amount: number;
+}
+
+export interface IDeleteEvent {
+  index: number;
+  amount: number;
+}
 
 /**
  * Represents a circular list; a list with a maximum size that wraps around when push is called,
  * overriding values at the start of the list.
  */
-export class CircularList<T> extends EventEmitter implements ICircularList<T> {
+export class CircularList<T> extends Disposable implements ICircularList<T> {
   protected _array: (T | undefined)[];
   private _startIndex: number;
   private _length: number;
+
+  public readonly onDeleteEmitter = this.register(new EventEmitter<IDeleteEvent>());
+  public readonly onDelete = this.onDeleteEmitter.event;
+  public readonly onInsertEmitter = this.register(new EventEmitter<IInsertEvent>());
+  public readonly onInsert = this.onInsertEmitter.event;
+  public readonly onTrimEmitter = this.register(new EventEmitter<number>());
+  public readonly onTrim = this.onTrimEmitter.event;
 
   constructor(
     private _maxLength: number
@@ -64,7 +82,7 @@ export class CircularList<T> extends EventEmitter implements ICircularList<T> {
    * Note that for performance reasons there is no bounds checking here, the index reference is
    * circular so this should always return a value and never throw.
    * @param index The index of the value to get.
-   * @return The value corresponding to the index.
+   * @returns The value corresponding to the index.
    */
   public get(index: number): T | undefined {
     return this._array[this._getCyclicIndex(index)];
@@ -90,19 +108,37 @@ export class CircularList<T> extends EventEmitter implements ICircularList<T> {
   public push(value: T): void {
     this._array[this._getCyclicIndex(this._length)] = value;
     if (this._length === this._maxLength) {
-      this._startIndex++;
-      if (this._startIndex === this._maxLength) {
-        this._startIndex = 0;
-      }
-      this.emit('trim', 1);
+      this._startIndex = ++this._startIndex % this._maxLength;
+      this.onTrimEmitter.fire(1);
     } else {
       this._length++;
     }
   }
 
   /**
+   * Advance ringbuffer index and return current element for recycling.
+   * Note: The buffer must be full for this method to work.
+   * @throws When the buffer is not full.
+   */
+  public recycle(): T {
+    if (this._length !== this._maxLength) {
+      throw new Error('Can only recycle when the buffer is full');
+    }
+    this._startIndex = ++this._startIndex % this._maxLength;
+    this.onTrimEmitter.fire(1);
+    return this._array[this._getCyclicIndex(this._length - 1)]!;
+  }
+
+  /**
+   * Ringbuffer is at max length.
+   */
+  public get isFull(): boolean {
+    return this._length === this._maxLength;
+  }
+
+  /**
    * Removes and returns the last value on the list.
-   * @return The popped value.
+   * @returns The popped value.
    */
   public pop(): T | undefined {
     return this._array[this._getCyclicIndex(this._length-- - 1)];
@@ -124,26 +160,28 @@ export class CircularList<T> extends EventEmitter implements ICircularList<T> {
         this._array[this._getCyclicIndex(i)] = this._array[this._getCyclicIndex(i + deleteCount)];
       }
       this._length -= deleteCount;
+      this.onDeleteEmitter.fire({ index: start, amount: deleteCount });
     }
 
-    if (items && items.length) {
-      // Add items
-      for (let i = this._length - 1; i >= start; i--) {
-        this._array[this._getCyclicIndex(i + items.length)] = this._array[this._getCyclicIndex(i)];
-      }
-      for (let i = 0; i < items.length; i++) {
-        this._array[this._getCyclicIndex(start + i)] = items[i];
-      }
+    // Add items
+    for (let i = this._length - 1; i >= start; i--) {
+      this._array[this._getCyclicIndex(i + items.length)] = this._array[this._getCyclicIndex(i)];
+    }
+    for (let i = 0; i < items.length; i++) {
+      this._array[this._getCyclicIndex(start + i)] = items[i];
+    }
+    if (items.length) {
+      this.onInsertEmitter.fire({ index: start, amount: items.length });
+    }
 
-      // Adjust length as needed
-      if (this._length + items.length > this.maxLength) {
-        const countToTrim = (this._length + items.length) - this.maxLength;
-        this._startIndex += countToTrim;
-        this._length = this.maxLength;
-        this.emit('trim', countToTrim);
-      } else {
-        this._length += items.length;
-      }
+    // Adjust length as needed
+    if (this._length + items.length > this._maxLength) {
+      const countToTrim = (this._length + items.length) - this._maxLength;
+      this._startIndex += countToTrim;
+      this._length = this._maxLength;
+      this.onTrimEmitter.fire(countToTrim);
+    } else {
+      this._length += items.length;
     }
   }
 
@@ -157,7 +195,7 @@ export class CircularList<T> extends EventEmitter implements ICircularList<T> {
     }
     this._startIndex += count;
     this._length -= count;
-    this.emit('trim', count);
+    this.onTrimEmitter.fire(count);
   }
 
   public shiftElements(start: number, count: number, offset: number): void {
@@ -178,10 +216,10 @@ export class CircularList<T> extends EventEmitter implements ICircularList<T> {
       const expandListBy = (start + count + offset) - this._length;
       if (expandListBy > 0) {
         this._length += expandListBy;
-        while (this._length > this.maxLength) {
+        while (this._length > this._maxLength) {
           this._length--;
           this._startIndex++;
-          this.emit('trim', 1);
+          this.onTrimEmitter.fire(1);
         }
       }
     } else {
@@ -198,6 +236,6 @@ export class CircularList<T> extends EventEmitter implements ICircularList<T> {
    * @returns The cyclic index.
    */
   private _getCyclicIndex(index: number): number {
-    return (this._startIndex + index) % this.maxLength;
+    return (this._startIndex + index) % this._maxLength;
   }
 }

@@ -1,0 +1,95 @@
+Description: don't build test files
+Author: Yadd <yadd@debian.org>
+Forwarded: not-needed
+Last-Update: 2023-09-15
+
+--- a/addons/xterm-addon-attach/tsconfig.json
++++ b/addons/xterm-addon-attach/tsconfig.json
+@@ -1,5 +1,6 @@
+ {
+   "files": [],
++  "exclude": ["**/*.test.ts"],
+   "include": [],
+   "references": [
+     { "path": "./src" }
+--- a/addons/xterm-addon-canvas/tsconfig.json
++++ b/addons/xterm-addon-canvas/tsconfig.json
+@@ -1,5 +1,6 @@
+ {
+   "files": [],
++  "exclude": ["**/*.test.ts"],
+   "include": [],
+   "references": [
+     { "path": "./src" }
+--- a/addons/xterm-addon-fit/tsconfig.json
++++ b/addons/xterm-addon-fit/tsconfig.json
+@@ -1,5 +1,6 @@
+ {
+   "files": [],
++  "exclude": ["**/*.test.ts"],
+   "include": [],
+   "references": [
+     { "path": "./src" }
+--- a/addons/xterm-addon-image/tsconfig.json
++++ b/addons/xterm-addon-image/tsconfig.json
+@@ -1,5 +1,6 @@
+ {
+   "files": [],
++  "exclude": ["**/*.test.ts"],
+   "include": [],
+   "references": [
+     { "path": "./src" }
+--- a/addons/xterm-addon-ligatures/tsconfig.json
++++ b/addons/xterm-addon-ligatures/tsconfig.json
+@@ -1,5 +1,6 @@
+ {
+   "files": [],
++  "exclude": ["**/*.test.ts"],
+   "include": [],
+   "references": [
+     { "path": "./src" }
+--- a/addons/xterm-addon-search/tsconfig.json
++++ b/addons/xterm-addon-search/tsconfig.json
+@@ -1,5 +1,6 @@
+ {
+   "files": [],
++  "exclude": ["**/*.test.ts"],
+   "include": [],
+   "references": [
+     { "path": "./src" }
+--- a/addons/xterm-addon-serialize/tsconfig.json
++++ b/addons/xterm-addon-serialize/tsconfig.json
+@@ -1,5 +1,6 @@
+ {
+   "files": [],
++  "exclude": ["**/*.test.ts"],
+   "include": [],
+   "references": [
+     { "path": "./src" }
+--- a/addons/xterm-addon-unicode11/tsconfig.json
++++ b/addons/xterm-addon-unicode11/tsconfig.json
+@@ -1,5 +1,6 @@
+ {
+   "files": [],
++  "exclude": ["**/*.test.ts"],
+   "include": [],
+   "references": [
+     { "path": "./src" }
+--- a/addons/xterm-addon-web-links/tsconfig.json
++++ b/addons/xterm-addon-web-links/tsconfig.json
+@@ -1,5 +1,6 @@
+ {
+   "files": [],
++  "exclude": ["**/*.test.ts"],
+   "include": [],
+   "references": [
+     { "path": "./src" }
+--- a/addons/xterm-addon-webgl/tsconfig.json
++++ b/addons/xterm-addon-webgl/tsconfig.json
+@@ -1,5 +1,6 @@
+ {
+   "files": [],
++  "exclude": ["**/*.test.ts"],
+   "include": [],
+   "references": [
+     { "path": "./src" }

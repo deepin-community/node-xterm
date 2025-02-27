@@ -1,16 +1,57 @@
-node-xterm (3.8.1+~cs0.9.0-1) unstable; urgency=medium
+node-xterm (5.3.0-4) unstable; urgency=medium
+
+  * Need wabt 1.0.36 and a rebuild.
+
+ -- Jérémy Lal <kapouer@melix.org>  Mon, 17 Feb 2025 15:01:35 +0100
+
+node-xterm (5.3.0-3) unstable; urgency=medium
+
+  [ Yadd ]
+  * Declare compliance with policy 4.7.0
+
+  [ Jérémy Lal ]
+  * Limit memory during inwasm compilation (See #1076388)
+
+ -- Yadd <yadd@debian.org>  Tue, 16 Jul 2024 17:38:18 +0400
+
+node-xterm (5.3.0-2) unstable; urgency=medium
 
   * Team upload
-  * Add node-pty as component
-  * Use an older tags page for getting older versions
-  * New upstream version 3.8.1+~cs0.9.0
-  * Add copyright for node-pty component
-  * Document why the component is not built
-  * Switch to rollup for building browser bundle (Closes: #980406)
-  * Remove build dependency on node-typescript-types (Closes: #979774)
-  * Ignore some type mismatches (Thanks to Xavier Guimard) (Closes: #954678)
+  * Back to unstable
 
- -- Pirate Praveen <praveen@debian.org>  Tue, 19 Jan 2021 23:59:29 +0530
+ -- Yadd <yadd@debian.org>  Thu, 02 Nov 2023 06:41:29 +0400
+
+node-xterm (5.3.0-1) experimental; urgency=medium
+
+  * Team upload
+
+  [ Pirate Praveen ]
+  * Update minimum version of pkg-js-tools to use version from backports
+
+  [ Nilesh Patra ]
+  * Drop Un-needed patches
+  * Update tsc prebuild command
+
+  [ Yadd ]
+  * Bump debhelper compatibility level to 13
+  * Add upstream/metadata
+  * Use dh-sequence-nodejs instead of pkg-js-tools
+  * Remove an obsolete maintscript entry
+  * Remove unnecessary get-orig-source-target
+  * Update standards version to 4.6.2, no changes needed
+  * Fix GitHub tags regex
+  * Update nodejs dependency to nodejs:any
+  * Embed source-map-loader and utf8 for build only
+  * Add test during build
+  * Update copyright
+  * Embed xterm-wasm-parts
+  * New upstream version 5.3.0
+  * Update build dependencies: add clang lld inwasm node-node-pty node-sixel
+    wabt webpack
+  * Add lintian overrides
+  * Drop the link between node-xterm and libjs-xterm
+
+ -- Yadd <yadd@debian.org>  Fri, 15 Sep 2023 18:25:05 +0400
 
 node-xterm (3.8.1-4) unstable; urgency=medium
 

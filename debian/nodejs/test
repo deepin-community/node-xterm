@@ -1,0 +1,1 @@
+NODE_PATH=./out mocha './out/**/*test.js' './addons/**/out/*test.js'

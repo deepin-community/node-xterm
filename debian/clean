@@ -1,0 +1,8 @@
+addons/*/lib/
+addons/*/out-test/
+addons/*/out/
+lib/
+out-test/
+out/
+xterm-wasm-parts/inwasm-builds/
+xterm-wasm-parts/lib/
